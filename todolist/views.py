@@ -6,14 +6,16 @@ from rest_framework.exceptions import NotFound
 from .serializers.populated import PopulateTodolistSerializer
 from .models import Todolist
 from .serializers.common import TodolistSerializer
-
+from rest_framework.permissions import IsAuthenticated
 
 
 
 class TodolistView(APIView):
+    permission_classes = (IsAuthenticated,)
 
-    def get(self, _request):
-        todolists = Todolist.objects.all()
+    def get(self, request):
+        logged_in_user = request.user.id
+        todolists = Todolist.objects.filter(user=logged_in_user)
         serialized_todolists = PopulateTodolistSerializer(todolists, many=True)
         return Response(serialized_todolists.data, status=status.HTTP_200_OK)
     

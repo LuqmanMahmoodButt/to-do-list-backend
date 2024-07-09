@@ -3,6 +3,6 @@ from .views import ItemlistView, itemlistDetailView
 
 
 urlpatterns = [
-    path('todoitems/', ItemlistView.as_view(), name='itemlist'),
-    path('todoitems/<int:pk>/', itemlistDetailView.as_view(), name='itemlist-detail'),
+    path('', ItemlistView.as_view(), name='itemlist'),
+    path('<int:pk>/', itemlistDetailView.as_view(), name='itemlist-detail'),
 ]
