@@ -27,11 +27,11 @@ class LoginView(APIView):
 
     def post(self, request):
         # get the data you need out ogf the request object (email and password)
-        username = request.data.get('username')
+        email = request.data.get('email')
         password = request.data.get('password')
 
         try:
-            user_to_login = User.objects.get(username=username)
+            user_to_login = User.objects.get(email=email)
         except User.DoesNotExist:
             raise PermissionDenied(detail='Invalid Details')
         

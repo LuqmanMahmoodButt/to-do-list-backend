@@ -1,5 +1,5 @@
 from .common import TodoitemSerializer
 from todolist.serializers.common import ToDoListSerializer
 
-class PopulateCarSerializer(TodoitemSerializer):
+class PopulateTodoitemSerializer(TodoitemSerializer):
     todolist = ToDoListSerializer()

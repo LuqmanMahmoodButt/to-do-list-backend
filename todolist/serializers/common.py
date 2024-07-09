@@ -1,10 +1,10 @@
 
 from rest_framework import serializers
-from ..models import ToDoList
+from ..models import Todolist
 
 
 class TodolistSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = ToDoList
+        model = Todolist
         fields = '__all__'

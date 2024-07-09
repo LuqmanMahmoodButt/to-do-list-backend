@@ -40,7 +40,7 @@ class itemlistDetailView(APIView):
         try:
             return Todoitem.objects.get(pk=pk)
         except Todoitem.DoesNotExist:
-            raise NotFound(detail="cant find the car")
+            raise NotFound(detail="cant find the todoitem")
 
     def get(self, _request, pk):
         try:
@@ -48,7 +48,7 @@ class itemlistDetailView(APIView):
             serializer_todoitem = PopulateTodoitemSerializer(todoitem)
             return Response(serializer_todoitem.data, status=status.HTTP_200_OK)
         except Todoitem.DoesNotExist:
-            raise NotFound(detail="Can't find that book")
+            raise NotFound(detail="Can't find that item")
     
     def put(self, request, pk):
         todoitem_to_edit = self.get_todoitem(pk=pk)

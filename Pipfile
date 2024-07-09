@@ -8,6 +8,7 @@ django = "*"
 psycopg2-binary = "*"
 pyjwt = "*"
 djangorestframework = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 autopep8 = "*"

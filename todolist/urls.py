@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import TodoItemViewSet, CarDetailView
+from .views import TodolistView
  
 urlpatterns = [
-  path('', TodoItemViewSet.as_view()),
+  path('', TodolistView.as_view()),
 ]
