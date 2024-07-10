@@ -52,11 +52,11 @@ class itemlistDetailView(APIView):
     
     def put(self, request, pk):
         todoitem_to_edit = self.get_todoitem(pk=pk)
-        if todoitem_to_edit.owner.id != request.user.id and not (request.user.is_staff or request.user.is_superuser):
-            return Response({'message': 'Unauthorized'}, status=status.HTTP_401_UNAUTHORIZED)
+        # if todoitem_to_edit.owner.id != request.user.id and not (request.user.is_staff or request.user.is_superuser):
+        # return Response({'message': 'Unauthorized'}, status=status.HTTP_401_UNAUTHORIZED)
         
-        original_user = todoitem_to_edit.owner.id  
-        request.data['user'] = original_user
+        # original_user = todoitem_to_edit.owner.id  
+        # request.data['user'] = original_user
         updated_todoitem = TodoitemSerializer(todoitem_to_edit, data=request.data)
         
         if updated_todoitem.is_valid():

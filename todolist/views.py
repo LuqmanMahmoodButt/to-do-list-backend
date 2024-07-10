@@ -33,19 +33,7 @@ class TodolistView(APIView):
         except Exception as e:
             print('Error:', str(e))
             return Response(str(e), status=status.HTTP_422_UNPROCESSABLE_ENTITY)
-    # def post(self, request):
-    #     request.data["user"] = request.user.id
-    #     Todolist_to_add = TodolistSerializer(data=request.data)
-    #     try:
-    #         Todolist_to_add.is_valid()
-    #         Todolist_to_add.save()
-    #         Todolist_populated = Todolist.objects.get(pk=Todolist_to_add.id)
-    #         serializer_brand = PopulateTodolistSerializer(Todolist_populated)
-    #         return Response(serializer_brand.data, status=status.HTTP_201_CREATED)    
-    #     except Exception as e:
-    #         print('Error')
-    #         return Response(e.__dict__ if e.__dict__ else str(e), status=status.HTTP_422_UNPROCESSABLE_ENTITY)
-
+   
 class TodolistDetailView(APIView):
     
     def get_todolist(self, pk):
