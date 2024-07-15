@@ -28,6 +28,9 @@ if ENV == 'DEV':
     SECRET_KEY = 'django-insecure-_0%74e@opnc!xz!m8q6yt8qyaxgxrg_9af*am$k#$2nnvm(9#v'
 else:
     SECRET_KEY = str(os.getenv('SECRET_KEY'))
+
+
+CSRF_TRUSTED_ORIGINS = [str(os.getenv('DEPLOY_URL'))]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = ENV == 'DEV'
 
