@@ -8,6 +8,7 @@ class Todoitem(models.Model):
 
     item = models.CharField(max_length=300)
     complete = models.BooleanField(default=False)
+    due_date = models.DateField(blank=True, null=True)
     todolist = models.ForeignKey(
         "todolist.Todolist",
         related_name="todoitem",

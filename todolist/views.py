@@ -18,7 +18,8 @@ class TodolistView(APIView):
         todolists = Todolist.objects.filter(user=logged_in_user)
         serialized_todolists = PopulateTodolistSerializer(todolists, many=True)
         return Response(serialized_todolists.data, status=status.HTTP_200_OK)
-    
+   
+
     def post(self, request):
         request.data["user"] = request.user.id
         Todolist_to_add = TodolistSerializer(data=request.data)

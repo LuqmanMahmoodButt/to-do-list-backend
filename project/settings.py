@@ -9,23 +9,29 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
-
+import django_on_heroku
+from dotenv import load_dotenv
+import dj_database_url
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+ENV = str(os.getenv('ENVIRONMENT', 'DEV'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-_0%74e@opnc!xz!m8q6yt8qyaxgxrg_9af*am$k#$2nnvm(9#v'
-
+if ENV == 'DEV':
+    # Replace the value below with your own secret and remove this comment.
+    SECRET_KEY = 'django-insecure-_0%74e@opnc!xz!m8q6yt8qyaxgxrg_9af*am$k#$2nnvm(9#v'
+else:
+    SECRET_KEY = str(os.getenv('SECRET_KEY'))
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = ENV == 'DEV'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -83,14 +89,16 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
+DATABASES = {}
+if ENV != 'DEV':
+     DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)	
+else:
+     DATABASES['default'] =  {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'to-do-list',
+        'NAME': 'to-do-list', # < --- make sure you change this
         'HOST': 'localhost',
         'PORT': 5432
     }
-}
 
 
 # Password validation
@@ -144,3 +152,5 @@ REST_FRAMEWORK = {
         'jwt_auth.authentication.JWTAuthentication'
     ],
 }
+
+django_on_heroku.settings(locals())
