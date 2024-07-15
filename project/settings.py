@@ -30,7 +30,7 @@ else:
     SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 
-CSRF_TRUSTED_ORIGINS = ["https://list-to-do-8c095c500d8c.herokuapp.com"]
+CSRF_TRUSTED_ORIGINS = [str(os.getenv('DEPLOY_URL'))]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = ENV == 'DEV'
 
